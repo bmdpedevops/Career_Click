@@ -8,7 +8,7 @@ pipeline {
             steps {
                 git url: 'git@github.com:bmdpedevops/Career_Click.git',
                 branch: 'main',
-                    credentialsId: 'github-ssh-key'
+                credentialsId: 'github-ssh-key'
             }
         }
 
