@@ -1,0 +1,13 @@
+Flask
+flask_bcrypt
+Flask-Cors
+Flask-PyMongo
+Flask-Uploads
+pillow
+sendgrid
+numpy
+pandas
+matplotlib
+python-dateutil
+load_dotenv
+gunicorn

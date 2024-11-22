@@ -1,0 +1,288 @@
+APIS 
+=====
+source .venv/bin/activate
+gunicorn app:app --reload
+
+USER APP
+========
+
+Login -  ✅
+Verification OTP -  ✅
+user profile  -  ✅
+user profile update  -  ✅
+user profile image upload  -  ✅
+upload resume  -  ✅    
+delete account  with otp   -  ✅      
+proejcts_list   -  ✅ 
+qualifications_list  -  ✅ 
+employeement list  -  ✅ 
+user locations   list -  ✅ 
+
+
+Pending : 
+1. Resend  OTP 
+2. Jobs Types based listings recent 5 or any desired 
+3.category wise type based listings recent 5 or any desired 
+
+
+
+
+
+GOOGLE and Other Acccount Logins - 
+
+referal Code Generation    -  ✅ 
+Referal Code add in Profile Update    -  ✅ 
+survay system - Later 
+
+
+
+states & locations with lat and long  -  ✅
+
+
+notifications 
+featured jobs list 
+jobs list category wise list with limit 
+    -> public / private 
+    -> skills 
+    -> location 
+    -> company type 
+    -> experance type 
+    -> salary range 
+save job alert option
+apply job 
+recent applied jobs list
+events 
+
+
+
+
+
+
+
+
+
+Recruiter App:
+
+Login with email  -  ✅
+Verify OTP with email -  ✅
+Profile  
+Update Profile
+
+Add job  -  ✅
+    -> title, years_of_experience_required, salary_offer, salary_not_disclosure, industry_type,employment_type,job_description,skills_required,work_mode,location
+\
+ 
+API's Required:
+--------------- 
+1. {{app}}user/profile_update   
+
+	existing Body:
+	
+		{
+			"access_token":"TRns2CtnGgRSU1kELBnyFpIiZmsoItdMUNMNX00iq4drv",
+			"first_name":"Arjun Kumar",
+			"last_name":"AI",
+			"email":"ujk222@gmail.com",
+			"lat":"17.8989899",
+			"long":"82.897878787878",
+			"referral_code":"",
+			"profile_title":"AI Expert",
+			"profile_image":"static/uploads/user/hr8rvfksrujymlkijdg5sd6fr47xi4phiearc5fi.jpeg",
+			"work_status":"Experanced",
+			"total_years_of_experance":"9",
+			"package_per_anum":"24",
+			"notice_period_in_months":"3",
+			"location":"Karimnagar,Khamam,Hyderabad",
+			"resume":""
+		}
+	required body according to UI:
+	
+	1. firstname
+	2. Last name - Done
+	3. Mobile  - Done
+	4. email id - Done
+	5. location - Done
+	6. profile title
+	7. work_status  - expereieced/fresher  (dropDown API)
+	8. experience  (dropDown API)
+	9. current package 
+	10. Notice period - months  (dropDown API)
+	11. Language(dropDown)  (dropDown API)
+	12. upload resume(file)
+	 
+	
+
+
+2. {{app}}user/details
+
+	response getting:
+	
+	{
+   	 "data": {
+        	"access_token": "eRTQePLZI7OKAsNf5Zb5hvC4APFOqCUeXD1QNs6sTF3DE",
+        	"created_at": "22-07-2024 14:31:40",
+        	"email": "ujk333@yahoo.com",
+        	"last_login_time": "26-07-2024 19:27:43",
+        	"mobile": "9390090966",
+        	"name": "Jithendra Kumar"
+    	},
+    	"message": "Success",
+    	"status": "valid"
+	}
+
+	required response according to UI:
+	
+	{
+		"data": {
+			"access_token": "TRns2CtnGgRSU1kELBnyFpIiZmsoItdMUNMNX00iq4drv",
+			"active_status": "Active",
+			"created_at": "25-09-2024 03:21:06",
+			"email": "ujk222@gmail.com",
+			"first_name": "Arjun Kumar",
+			"last_login_time": "01-10-2024 02:04:01",
+			"last_name": "AI",
+			"lat": "17.8989899",
+			"location": "Karimnagar,Khamam,Hyderabad",
+			"long": "82.897878787878",
+			"mobile": "9666544180",
+			"notice_period_in_months": "3",
+			"package_per_anum": "24",
+			"profile_image": "static/uploads/user/hr8rvfksrujymlkijdg5sd6fr47xi4phiearc5fi.jpeg",
+			"profile_title": "AI Expert",
+			"resume": "",
+			"total_years_of_experance": "9",
+			"work_status": "Experanced"
+		},
+		"message": "Success",
+		"status": "valid"
+	}
+
+
+3. {{app}}user_projects/add	& {{app}}user_projects/update   //add and Updating project
+
+	existing body:
+	
+	{
+    	"access_token":"eRTQePLZI7OKAsNf5Zb5hvC4APFOqCUeXD1QNs6sTF3DE",
+    	"title":"Carrier Click",
+    	"client_name":"BMDPE",
+    	"project_url":"https://bmdpe.in",
+    	"start_date":"2024-01-22",
+    	"end_date":"2024-07-22",
+    	"description":"THis is job portal Project"
+	}
+
+
+	need one more parameter
+
+	"status" : "Completed"/"InProgress"
+	
+	NEw
+	{
+		"access_token":"TRns2CtnGgRSU1kELBnyFpIiZmsoItdMUNMNX00iq4drv",
+		"title":"BidnGo",
+		"client_name":"BMDPE",
+		"project_url":"https://bidngo.in",
+		"start_date":"2024-01-2",
+		"end_date":"2024-09-2",
+		"status":"Completed",
+		"description":"THis is  bid related Project"
+	}
+
+4. {{app}}user_projects/all	//get projects list -  Done 
+
+	add 
+	"status" : Completed/Incompleted  - DONE 
+	in response also
+
+5. {{app}}user_education/add	& {{app}}user_education/update  //add and Update education
+	add one more parameter 
+	"grade_point_average" : "value"  - checking done
+	in body
+
+6. {{app}}user_education/all 	//get list of educations
+	add one more parameter 
+	"grade_point_average" : "value"
+	in response
+
+7. {{app}}user_employment/add & {{app}}user_employment/update		//add and Update employment
+	add one more parameter
+	"current_ctc":"value"
+	in body
+	
+	// ! is_currently_working == Yes 
+		'current_ctc': 1 , # (dropDown API) check profile related apis 
+		'skills_used':"php,javascript", dropdown api  required category and sub category 
+		'job_description':"",
+		'notice_period_in_months':"1",
+
+	ins_data = {
+		'user_id':user["_id"],
+		'job_title':job_title,
+		'employment_type':employment_type,
+		'company_name':company_name,
+		'is_currently_working':is_currently_working,
+		'status':status,
+		'start_date':start_date,
+		'end_date':end_date,
+		'total_years':total_years,
+		'created_at':getTimeStamp()
+		}
+	if is_currently_working == 'yes':
+		ins_data.update({
+			'current_ctc':current_ctc,
+			'skills_used':skills_used, dropdown api  required category and sub category 
+			'job_description':job_description,
+			'notice_period_in_months':notice_period_in_months,
+		})
+
+8. {{app}}user_employment/all	//get employment list
+	add two more parametrs
+	"salary":"value", //salary is notting but the current_ctc 
+	"skills_used":"value,value,value"
+	in response
+
+9. Need Features Jobs api (or) add one more parameter in response for this this api => {{app}}user_jobs/all  => "is_featured":Yes/No  Added
+		-- DONE 
+
+10. {{app}}user_jobs/all  //getting all jobs api
+
+	need few more parameters
+	"employment_type":"Full-time/part-time/freelancing/contract",
+	"is_topCompany":true/false,
+	"company_image_url":"image url",
+	"isApplied":true/false
+	in response
+
+[ISSUE] => View count is working but total_applicants_count is still showing 0(zero) when I applied for this job also
+	--> {{app}}user_jobs/view_count_update/66abd946ec3c927699309b3a 
+		need to call this api with job id and acces token then it will update the count
+
+
+11. Need Notifications API - Firebase TOken Required
+
+12. Need Job Search API with Filters
+
+
+13. Need Refer and Earn API's according to UI  // ! Deep Link urls need to create 
+			in profile  udpate theare is a referal code  need to update the refe details 
+			
+14. EVents API according to api -
+
+	response body:
+
+	"event_image_url":"image URL",
+	"event_date":"value",
+	"title"
+	"description",
+	"venue"
+	"location"
+	"organizer_details"	
+	"is_intrested":true/false
+	"is_saved":true/false	
+
+15. save job api
+
+16. "is_jobSaved" need this parameter from jobs API
+
+17 I Love Python
