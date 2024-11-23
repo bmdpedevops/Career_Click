@@ -11,3 +11,4 @@ matplotlib
 python-dateutil
 load_dotenv
 gunicorn
+pytest

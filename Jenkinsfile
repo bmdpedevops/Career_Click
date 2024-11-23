@@ -32,6 +32,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    sh '. venv/bin/activate && pip install pytest'
                     sh 'source venv/bin/activate && pytest --disable-warnings'
                 }
             }
