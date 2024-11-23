@@ -11,7 +11,14 @@ pipeline {
                 credentialsId: 'github-ssh-key'
             }
         }
-
+        stage('Setup') {
+            steps {
+                script {
+                    // Upgrade pip to the latest version
+                    sh 'python3 -m pip install --upgrade pip'
+                }
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 script {
