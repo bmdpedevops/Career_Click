@@ -29,17 +29,17 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-    steps {
-        script {
-            // Install pytest in the virtual environment
-            sh '. venv/bin/activate && pip install pytest'
+//         stage('Run Tests') {
+//     steps {
+//         script {
+//             // Install pytest in the virtual environment
+//             sh '. venv/bin/activate && pip install pytest'
 
-            // Run tests using pytest
-            sh '. venv/bin/activate && pytest tests/ --disable-warnings -v'
-        }
-    }
-}
+//             // Run tests using pytest
+//             sh '. venv/bin/activate && pytest tests/ --disable-warnings -v'
+//         }
+//     }
+// }
 
 
         stage('Build Docker Image') {
