@@ -63,7 +63,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY ec2-user@ec2-54-208-197-251.compute-1.amazonaws.com "
+                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY ec2-user@ec2-3-82-230-219.compute-1.amazonaws.com "
                     docker pull amukthamalyadagaje/flask-app:latest &&
                     docker run -d -p 80:5000 amukthamalyadagaje/flask-app:latest"
                     """
