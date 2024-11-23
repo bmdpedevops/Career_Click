@@ -24,27 +24,27 @@ from controllers.notifications import notificationCtrl
 from controllers.authentication import authCtrl
 from controllers.categories import categoriesCtrl
 
-#admin 
+# admin
 from controllers.admin.categories_ctrl import adminCategoriesCtrl
 from controllers.admin.SubCategoryCtrl import adminSubCategoriesCtrl
 from controllers.admin.JobTypesCtrl import adminJobTypesCtrl
 from controllers.admin.events_ctrl import adminEventsCtrl
 
-#requiter 
-from controllers.recruiter  import recruiter_bp
+# requiter
+from controllers.recruiter import recruiter_bp
 
-#ends 
+# ends
 
 app = Flask(__name__)
 load_dotenv()
 
- 
-app.config['CORS_HEADERS'] = 'application/json' 
+
+app.config['CORS_HEADERS'] = 'application/json'
 app.secret_key = 'ummadisingu-jithendra-kumar--full-stack-developer'
 app.config['SESSION_TYPE'] = 'filesystem'
 print(os.environ.get('APP_MODE'))
 try:
-    if os.environ.get('APP_MODE') == "PRODUCTUION": 
+    if os.environ.get('APP_MODE') == "PRODUCTUION":
         app.config["MONGO_URI"] = "mongodb+srv://aiarjuncode:cusVUyMfQP2wnPSz@carrier-click-db.jymmxt2.mongodb.net/carrier-click"
     else:
         # app.config["MONGO_URI"] = ""
@@ -59,15 +59,20 @@ bcrypt.init_app(app)
 mongo.init_app(app)
 CORS(app)
 
-db = mongo.db.users # type: ignore
+db = mongo.db.users  # type: ignore
 
-#URL START
+# URL START
+
+
 @app.route("/")
 def index():
     # return "Welcome to Carrier Click".format(os.environ.get('APP_MODE'))
     return render_template("home.html")
+
+
 def allowed_file(filename):
-    return '.' in filename and  filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.errorhandler(404)
 def not_found(e):
@@ -83,12 +88,12 @@ def upload_file():
         file = request.files['file']
         try:
             folder_name = request.form.get("folder_name")
-            #checking the folder exists
+            # checking the folder exists
             upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
             if not os.path.exists(upload_dir):
                 os.makedirs(upload_dir)
         except KeyError:
-            folder_name = "" 
+            folder_name = ""
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
@@ -98,7 +103,8 @@ def upload_file():
             file.filename = "_" + random_string_digits(40).lower() + '.' + ext
             filename = secure_filename(file.filename)
             if folder_name:
-                upload_dir = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
+                upload_dir = os.path.join(
+                    app.config['UPLOAD_FOLDER'], folder_name)
                 if not os.path.exists(upload_dir):
                     os.makedirs(upload_dir)
                 file_path = os.path.join(upload_dir, filename)
@@ -116,11 +122,11 @@ def upload_file():
                     "file": filename,
                     "full_file_address": normalized_path
                 }})
-        return jsonify({"status": "invalid", "message": "Failed upload file." })
+        return jsonify({"status": "invalid", "message": "Failed upload file."})
     return jsonify({"status": "invalid", "message": "invalid data.Image upload failed."})
 
 
-#user 
+# user
 app.register_blueprint(userCtrl, url_prefix="/user")
 app.register_blueprint(userDataCtrl, url_prefix="/user_data")
 app.register_blueprint(userProjectsCtrl, url_prefix="/user_projects")
@@ -134,26 +140,17 @@ app.register_blueprint(categoriesCtrl, url_prefix="/category")
 app.register_blueprint(notificationCtrl, url_prefix="/notifications")
 
 
-
-#admin
-app.register_blueprint(adminCategoriesCtrl,url_prefix="/admin/cats")    
-app.register_blueprint(adminSubCategoriesCtrl,url_prefix="/admin/sub_category")
-app.register_blueprint(adminJobTypesCtrl,url_prefix="/admin/job_types")
-app.register_blueprint(adminEventsCtrl,url_prefix="/admin/events")
+# admin
+app.register_blueprint(adminCategoriesCtrl, url_prefix="/admin/cats")
+app.register_blueprint(adminSubCategoriesCtrl,
+                       url_prefix="/admin/sub_category")
+app.register_blueprint(adminJobTypesCtrl, url_prefix="/admin/job_types")
+app.register_blueprint(adminEventsCtrl, url_prefix="/admin/events")
 
 
 # Recruiter  Arjun AI
 app.register_blueprint(recruiter_bp, url_prefix='/recruiter')
 
 
-
-if __name__ == "__main__":  
-    app.run(host="0.0.0.0",debug=True)
-    
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
