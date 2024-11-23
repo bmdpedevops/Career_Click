@@ -14,7 +14,8 @@ pipeline {
         stage('Setup') {
             steps {
                 script {
-                    // Upgrade pip to the latest version
+                    // Ensure pip is installed and then upgrade pip
+                    sh 'python3 -m ensurepip --upgrade'
                     sh 'python3 -m pip install --upgrade pip'
                 }
             }
